@@ -17,17 +17,17 @@ This repository contains the **Doctor Booking Agent**, an AI-driven system that 
 
 | **Admin Dashboard** | **Doctor Dashboard** |
 | :---: | :---: |
-| <img src="https://github.com/sujitlaware1809/Breakpoint-25/blob/main/doctor_booking_agent/frontend/public/admin.jpg" width="100%" alt="Admin Dashboard" /> | <img src="doctor_booking_agent/frontend/public/dco2.jpg" width="100%" alt="Doctor Dashboard" /> |
+| <img src="https://github.com/sujitlaware1809/Breakpoint-25/blob/main/doctor_booking_agent/frontend/public/admin.jpg" width="100%" alt="Admin Dashboard" /> | <img src="https://github.com/sujitlaware1809/Breakpoint-25/raw/main/doctor_booking_agent/frontend/public/dco2.jpg" width="100%" alt="Doctor Dashboard" /> |
 
 | **Doctor Profile** | **Analytics View** |
 | :---: | :---: |
-| <img src="doctor_booking_agent/frontend/public/docter.png" width="100%" alt="Doctor Profile" /> | <img src="doctor_booking_agent/frontend/public/admin1.jpg" width="100%" alt="Analytics" /> |
+| <img src="https://github.com/sujitlaware1809/Breakpoint-25/raw/main/doctor_booking_agent/frontend/public/docter.png" width="100%" alt="Doctor Profile" /> | <img src="https://github.com/sujitlaware1809/Breakpoint-25/raw/main/doctor_booking_agent/frontend/public/admin1.jpg" width="100%" alt="Analytics" /> |
 
 ### WhatsApp Integration
 
 | **Appointment Confirmation** | **Follow-up Reminder** |
 | :---: | :---: |
-| <img src="doctor_booking_agent/frontend/public/appiountment_con.jpeg" width="200" alt="WhatsApp Confirmation" /> | <img src="doctor_booking_agent/frontend/public/appiotiment_followup.jpeg" width="200" alt="Follow-up Reminder" /> |
+| <img src="https://github.com/sujitlaware1809/Breakpoint-25/raw/main/doctor_booking_agent/frontend/public/appiountment_con.jpeg" width="200" alt="WhatsApp Confirmation" /> | <img src="https://github.com/sujitlaware1809/Breakpoint-25/raw/main/doctor_booking_agent/frontend/public/appiotiment_followup.jpeg" width="200" alt="Follow-up Reminder" /> |
 
 ## Repository Structure
 
