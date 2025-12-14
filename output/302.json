@@ -1,0 +1,350 @@
+{
+    "data": {
+        "id": 302,
+        "call_id": "019b1a75-c51c-7000-8fbd-b51b0d48affc",
+        "created": "2025-12-14T01:24:44.857997",
+        "phone_number": "+918098444187",
+        "status": "completed",
+        "prompt": "<ai_master_prompt>\n  <critical_directive>You are a voice AI receptionist. Keep replies under 12 words. Do not give medical advice.</critical_directive>\n  <metadata>\n    <service_name>Doctor Booking System</service_name>\n    <agent_name>Receptionist</agent_name>\n    <language>Indian English</language>\n  </metadata>\n  <Persona>\n    <Identity>Efficient Hospital Receptionist</Identity>\n    <Tone>Professional, Direct, Polite</Tone>\n    <VocalStyle>\n      <Instruction>Speak naturally with Indian intonation</Instruction>\n      <Instruction>Maintain a steady, efficient pace</Instruction>\n    </VocalStyle>\n  </Persona>\n  <vocal_output_constraints>\n    <rule type=\"absolute\">Strictly no more than 12 words per response</rule>\n    <rule type=\"absolute\">No special characters or markdown</rule>\n    <rule type=\"pacing\">Wait for user to finish, then respond immediately</rule>\n  </vocal_output_constraints>\n  <context>\n    <user_phone>+918098444187</user_phone>\n    <hospital_roster>\n      <doc><name>Dr. Raj Kumar</name><spec>General Medicine</spec><slots>9:00 AM - 5:00 PM</slots></doc>\n      <doc><name>Dr. Priya Sharma</name><spec>Pediatrics</spec><slots>10:00 AM - 4:00 PM</slots></doc>\n      <doc><name>Dr. Arun Nair</name><spec>Cardiology</spec><slots>9:00 AM - 3:00 PM</slots></doc>\n      <doc><name>Dr. Sujit Reddy</name><spec>Dermatology</spec><slots>11:00 AM - 6:00 PM</slots></doc>\n      <doc><name>Dr. Meera Patel</name><spec>Orthopedics</spec><slots>10:00 AM - 5:00 PM</slots></doc>\n    </hospital_roster>\n  </context>\n  <instructions>\n    1. Greet and ask for the patient's full name.\n    2. IF <target_doctor> is defined: Offer that specific slot. (Skip to step 5).\n    3. ELSE: Ask Symptoms.\n    4. Map Symptoms -> Specialty (Fever=GenMed, Heart=Cardio, Skin=Derma, Bone=Ortho, Child=Pediatrics).\n    5. Select matching doctor from <hospital_roster> and offer their slot.\n    6. Confirm details (Name, Doctor, Time) and ask 'Is this correct?'.\n    7. IF user says YES: Say 'Great! Your appointment is confirmed. You will receive an SMS/WhatsApp shortly.'\n    8. IMMEDIATELY ask 'Do you need help with anything else?' and WAIT for the user to reply.\n    9. IF user says NO: Say 'Goodbye!' and call end_call(reason='Booked').\n    10. IF user says YES: Help them, then repeat step 8.\n  </instructions>\n</ai_master_prompt>",
+        "evaluation_tool": {
+            "name": "call_outcomes",
+            "behavior": "BLOCKING",
+            "parameters": {
+                "type": "OBJECT",
+                "required": [
+                    "booked",
+                    "name",
+                    "symptoms",
+                    "specialty"
+                ],
+                "properties": {
+                    "date": {
+                        "type": "STRING",
+                        "description": "Date"
+                    },
+                    "name": {
+                        "type": "STRING",
+                        "description": "Name"
+                    },
+                    "time": {
+                        "type": "STRING",
+                        "description": "Time"
+                    },
+                    "booked": {
+                        "type": "BOOLEAN",
+                        "description": "Booked"
+                    },
+                    "symptoms": {
+                        "type": "STRING",
+                        "description": "Symptoms"
+                    },
+                    "specialty": {
+                        "type": "STRING",
+                        "description": "Specialty"
+                    }
+                }
+            },
+            "description": "Capture details"
+        },
+        "exotel_id": "cc649955334f4fb2a15fd96bb0a519ce",
+        "call_details": {
+            "callId": "019b1a75-c51c-7000-8fbd-b51b0d48affc",
+            "events": [
+                {
+                    "data": {
+                        "exotelCallId": "cc649955334f4fb2a15fd96bb0a519ce"
+                    },
+                    "event": "call-initiated",
+                    "timestamp": 1765675484850
+                },
+                {
+                    "data": {},
+                    "event": "websocket-established",
+                    "timestamp": 1765675493754
+                },
+                {
+                    "data": {},
+                    "event": "gemini-session-ready",
+                    "timestamp": 1765675494236
+                },
+                {
+                    "data": {},
+                    "event": "greeting-complete",
+                    "timestamp": 1765675496056
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675532630
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675549838
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675565661
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-1911566726672520255",
+                            "args": {
+                                "reason": "Booked"
+                            },
+                            "name": "end_call"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675620730
+                },
+                {
+                    "data": {
+                        "reason": "Booked",
+                        "source": "tool-handler"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765675620730
+                },
+                {
+                    "data": {
+                        "source": "system"
+                    },
+                    "event": "evaluation-start",
+                    "timestamp": 1765675620736
+                },
+                {
+                    "data": {
+                        "reason": "completed",
+                        "source": "exotel-http"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765675622277
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-13686529582449475933",
+                            "args": {
+                                "name": "Madhav Sujit",
+                                "time": "11:00 AM",
+                                "booked": true,
+                                "symptoms": "Skin issues",
+                                "specialty": "Dermatology"
+                            },
+                            "name": "call_outcomes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675623309
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-outcome-completed",
+                    "timestamp": 1765675623309
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-16204513086051466473",
+                            "args": {
+                                "note": "Call ended, appointment booked for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM.",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675624333
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-90669736396301054",
+                            "args": {
+                                "summary": "Booked an appointment for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM."
+                            },
+                            "name": "call_summary"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675625253
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-summary-completed",
+                    "timestamp": 1765675625253
+                },
+                {
+                    "data": {
+                        "source": "system",
+                        "evaluationData": {
+                            "callSummary": {
+                                "summary": "Booked an appointment for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM."
+                            },
+                            "callOutcomes": {
+                                "name": "Madhav Sujit",
+                                "time": "11:00 AM",
+                                "booked": true,
+                                "symptoms": "Skin issues",
+                                "specialty": "Dermatology"
+                            }
+                        }
+                    },
+                    "event": "evaluation-completed",
+                    "timestamp": 1765675625253
+                }
+            ],
+            "llmNotes": [
+                "Call ended, appointment booked for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM."
+            ],
+            "toolCalls": [
+                {
+                    "toolName": "end_call",
+                    "timestamp": 1765675620730
+                },
+                {
+                    "toolName": "call_outcomes",
+                    "timestamp": 1765675623309
+                },
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675624333
+                },
+                {
+                    "toolName": "call_summary",
+                    "timestamp": 1765675625253
+                }
+            ],
+            "phaseHistory": [
+                {
+                    "to": "connecting",
+                    "from": "initiated",
+                    "metadata": {},
+                    "timestamp": 1765675493754
+                },
+                {
+                    "to": "active",
+                    "from": "connecting",
+                    "metadata": {},
+                    "timestamp": 1765675496056
+                },
+                {
+                    "to": "evaluating",
+                    "from": "active",
+                    "metadata": {
+                        "reason": "Booked",
+                        "source": "tool-handler"
+                    },
+                    "timestamp": 1765675620736
+                },
+                {
+                    "to": "terminated",
+                    "from": "evaluating",
+                    "metadata": {
+                        "reason": "Booked",
+                        "source": "tool-handler",
+                        "callSummaryData": {
+                            "summary": "Booked an appointment for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM."
+                        },
+                        "callOutcomesData": {
+                            "name": "Madhav Sujit",
+                            "time": "11:00 AM",
+                            "booked": true,
+                            "symptoms": "Skin issues",
+                            "specialty": "Dermatology"
+                        },
+                        "evaluationCompleted": true
+                    },
+                    "timestamp": 1765675625253
+                }
+            ],
+            "usageMetadata": {
+                "totalTokenCount": 5528,
+                "promptTokenCount": 5528,
+                "promptTokensDetails": [
+                    {
+                        "modality": "TEXT",
+                        "tokenCount": 5395
+                    },
+                    {
+                        "modality": "AUDIO",
+                        "tokenCount": 133
+                    }
+                ]
+            },
+            "callSummaryData": {
+                "summary": "Booked an appointment for Madhav Sujit with Dr. Sujit Reddy for skin issues at 11:00 AM."
+            },
+            "callOutcomesData": {
+                "name": "Madhav Sujit",
+                "time": "11:00 AM",
+                "booked": true,
+                "symptoms": "Skin issues",
+                "specialty": "Dermatology"
+            },
+            "terminationReason": "Booked",
+            "terminationSource": "tool-handler",
+            "transcriptionData": {
+                "transcripts": [],
+                "interruptionTimestamps": [
+                    1765675522629,
+                    1765675539838,
+                    1765675555661,
+                    1765675571093,
+                    1765675575761,
+                    1765675612639
+                ],
+                "turnCompleteTimestamps": [
+                    1765675499601,
+                    1765675505915,
+                    1765675518078,
+                    1765675522630,
+                    1765675533918,
+                    1765675539838,
+                    1765675552667,
+                    1765675555661,
+                    1765675567701,
+                    1765675571093,
+                    1765675575761,
+                    1765675585345,
+                    1765675597959,
+                    1765675609525,
+                    1765675612639,
+                    1765675617411
+                ],
+                "generationCompleteTimestamps": [
+                    1765675497501,
+                    1765675504651,
+                    1765675512673,
+                    1765675527411,
+                    1765675546271,
+                    1765675560788,
+                    1765675580205,
+                    1765675592129,
+                    1765675603559,
+                    1765675615505
+                ]
+            }
+        }
+    },
+    "status": "success",
+    "status_code": 200,
+    "action_code": "DO_NOTHING"
+}

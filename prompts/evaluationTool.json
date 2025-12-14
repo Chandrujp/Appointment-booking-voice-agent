@@ -1,0 +1,53 @@
+{
+	"name": "call_outcomes",
+	"description": "mark the following for the call",
+	"parameters": {
+		"type": "OBJECT",
+		"properties": {
+			"quality_score": {
+				"type": "INTEGER",
+				"description": "Call quality rating from 1-10",
+				"minimum": 1,
+				"maximum": 10
+			},
+			"issues": {
+				"type": "ARRAY",
+				"description": "Any issues encountered",
+				"items": {
+					"type": "STRING"
+				}
+			},
+			"verified": {
+				"type": "STRING",
+				"enum": ["0", "1", "2", "3"],
+				"description": "Verification outcome: 1=confirmed, 2=denied, 3=unexpected end, 0=unclear"
+			},
+            "booked": {
+                "type": "BOOLEAN", 
+                "description": "Whether the appointment was successfully booked"
+            },
+            "name": {
+                "type": "STRING", 
+                "description": "Patient Name"
+            },
+            "symptoms": {
+                "type": "STRING", 
+                "description": "Patient Symptoms"
+            },
+            "specialty": {
+                "type": "STRING", 
+                "description": "Required Medical Specialty"
+            },
+            "date": {
+                "type": "STRING", 
+                "description": "Appointment Date"
+            },
+            "time": {
+                "type": "STRING", 
+                "description": "Appointment Time"
+            }
+		},
+		"required": ["verified", "quality_score", "issues", "booked", "name", "symptoms"]
+	},
+	"behavior": "BLOCKING"
+}

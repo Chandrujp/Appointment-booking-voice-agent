@@ -1,0 +1,445 @@
+{
+    "data": {
+        "id": 301,
+        "call_id": "019b1a72-fc32-7000-bae6-c1ea7bbc0430",
+        "created": "2025-12-14T01:21:42.695610",
+        "phone_number": "+918098444187",
+        "status": "completed",
+        "prompt": "<ai_master_prompt>\n  <critical_directive>You are a voice AI receptionist. Keep replies under 12 words. Do not give medical advice.</critical_directive>\n  <metadata>\n    <service_name>Doctor Booking System</service_name>\n    <agent_name>Receptionist</agent_name>\n    <language>Indian English</language>\n  </metadata>\n  <Persona>\n    <Identity>Efficient Hospital Receptionist</Identity>\n    <Tone>Professional, Direct, Polite</Tone>\n    <VocalStyle>\n      <Instruction>Speak naturally with Indian intonation</Instruction>\n      <Instruction>Maintain a steady, efficient pace</Instruction>\n    </VocalStyle>\n  </Persona>\n  <vocal_output_constraints>\n    <rule type=\"absolute\">Strictly no more than 12 words per response</rule>\n    <rule type=\"absolute\">No special characters or markdown</rule>\n    <rule type=\"pacing\">Wait for user to finish, then respond immediately</rule>\n  </vocal_output_constraints>\n  <context>\n    <user_phone>+918098444187</user_phone>\n    <hospital_roster>\n      <doc><name>Dr. Raj Kumar</name><spec>General Medicine</spec><slots>9:00 AM - 5:00 PM</slots></doc>\n      <doc><name>Dr. Priya Sharma</name><spec>Pediatrics</spec><slots>10:00 AM - 4:00 PM</slots></doc>\n      <doc><name>Dr. Arun Nair</name><spec>Cardiology</spec><slots>9:00 AM - 3:00 PM</slots></doc>\n      <doc><name>Dr. Sujit Reddy</name><spec>Dermatology</spec><slots>11:00 AM - 6:00 PM</slots></doc>\n      <doc><name>Dr. Meera Patel</name><spec>Orthopedics</spec><slots>10:00 AM - 5:00 PM</slots></doc>\n    </hospital_roster>\n  </context>\n  <instructions>\n    1. Greet and ask for the patient's full name.\n    2. IF <target_doctor> is defined: Offer that specific slot. (Skip to step 5).\n    3. ELSE: Ask Symptoms.\n    4. Map Symptoms -> Specialty (Fever=GenMed, Heart=Cardio, Skin=Derma, Bone=Ortho, Child=Pediatrics).\n    5. Select matching doctor from <hospital_roster> and offer their slot.\n    6. Confirm details (Name, Doctor, Time) and ask 'Is this correct?'.\n    7. IF user says YES: Say 'Great! Your appointment is confirmed. You will receive an SMS/WhatsApp shortly.'\n    8. IMMEDIATELY ask 'Do you need help with anything else?' and WAIT for the user to reply.\n    9. IF user says NO: Say 'Goodbye!' and call end_call(reason='Booked').\n    10. IF user says YES: Help them, then repeat step 8.\n  </instructions>\n</ai_master_prompt>",
+        "evaluation_tool": {
+            "name": "call_outcomes",
+            "behavior": "BLOCKING",
+            "parameters": {
+                "type": "OBJECT",
+                "required": [
+                    "booked",
+                    "name",
+                    "symptoms",
+                    "specialty"
+                ],
+                "properties": {
+                    "date": {
+                        "type": "STRING",
+                        "description": "Date"
+                    },
+                    "name": {
+                        "type": "STRING",
+                        "description": "Name"
+                    },
+                    "time": {
+                        "type": "STRING",
+                        "description": "Time"
+                    },
+                    "booked": {
+                        "type": "BOOLEAN",
+                        "description": "Booked"
+                    },
+                    "symptoms": {
+                        "type": "STRING",
+                        "description": "Symptoms"
+                    },
+                    "specialty": {
+                        "type": "STRING",
+                        "description": "Specialty"
+                    }
+                }
+            },
+            "description": "Capture details"
+        },
+        "exotel_id": "94d45065aa69a82cdfe3437b628619ce",
+        "call_details": {
+            "callId": "019b1a72-fc32-7000-bae6-c1ea7bbc0430",
+            "events": [
+                {
+                    "data": {
+                        "exotelCallId": "94d45065aa69a82cdfe3437b628619ce"
+                    },
+                    "event": "call-initiated",
+                    "timestamp": 1765675302689
+                },
+                {
+                    "data": {},
+                    "event": "websocket-established",
+                    "timestamp": 1765675318521
+                },
+                {
+                    "data": {},
+                    "event": "gemini-session-ready",
+                    "timestamp": 1765675318777
+                },
+                {
+                    "data": {},
+                    "event": "greeting-complete",
+                    "timestamp": 1765675320858
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-13571839749059623051",
+                            "args": {
+                                "note": "User responded to greeting",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675327211
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-1073107603567903292",
+                            "args": {
+                                "note": "User responded to greeting",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675330052
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-16931596516341176785",
+                            "args": {
+                                "note": "User provided name: Sujit",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675335989
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-5422626749106484913",
+                            "args": {
+                                "note": "User reported symptoms: hurting, headache, fever, sneezing",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675366640
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675369836
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675390829
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765675433072
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-12925835182775740045",
+                            "args": {
+                                "note": "User does not want to book an appointment",
+                                "operation": "append"
+                            },
+                            "name": "session_notes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675445065
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-18053818101038731101",
+                            "args": {
+                                "reason": "User ended the call"
+                            },
+                            "name": "end_call"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675456585
+                },
+                {
+                    "data": {
+                        "reason": "User ended the call",
+                        "source": "tool-handler"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765675456585
+                },
+                {
+                    "data": {
+                        "source": "system"
+                    },
+                    "event": "evaluation-start",
+                    "timestamp": 1765675456592
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-18053818101038730682",
+                            "args": {
+                                "name": "Sujit",
+                                "booked": false,
+                                "symptoms": "hurting, headache, fever, sneezing",
+                                "specialty": "General Medicine"
+                            },
+                            "name": "call_outcomes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675457614
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-outcome-completed",
+                    "timestamp": 1765675457614
+                },
+                {
+                    "data": {
+                        "reason": "completed",
+                        "source": "exotel-http"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765675457954
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-15751562867835720964",
+                            "args": {
+                                "summary": "The user, Sujit, requested a doctor's appointment for symptoms including hurting, headache, fever, and sneezing. I offered a slot with Dr. Raj Kumar, a General Medicine doctor, but the user declined and became frustrated. The user ultimately did not book an appointment."
+                            },
+                            "name": "call_summary"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765675459067
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-summary-completed",
+                    "timestamp": 1765675459068
+                },
+                {
+                    "data": {
+                        "source": "system",
+                        "evaluationData": {
+                            "callSummary": {
+                                "summary": "The user, Sujit, requested a doctor's appointment for symptoms including hurting, headache, fever, and sneezing. I offered a slot with Dr. Raj Kumar, a General Medicine doctor, but the user declined and became frustrated. The user ultimately did not book an appointment."
+                            },
+                            "callOutcomes": {
+                                "name": "Sujit",
+                                "booked": false,
+                                "symptoms": "hurting, headache, fever, sneezing",
+                                "specialty": "General Medicine"
+                            }
+                        }
+                    },
+                    "event": "evaluation-completed",
+                    "timestamp": 1765675459068
+                }
+            ],
+            "llmNotes": [
+                "User responded to greeting",
+                "User responded to greeting",
+                "User provided name: Sujit",
+                "User reported symptoms: hurting, headache, fever, sneezing",
+                "User does not want to book an appointment"
+            ],
+            "toolCalls": [
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675327211
+                },
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675330052
+                },
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675335989
+                },
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675366640
+                },
+                {
+                    "toolName": "session_notes",
+                    "timestamp": 1765675445065
+                },
+                {
+                    "toolName": "end_call",
+                    "timestamp": 1765675456585
+                },
+                {
+                    "toolName": "call_outcomes",
+                    "timestamp": 1765675457614
+                },
+                {
+                    "toolName": "call_summary",
+                    "timestamp": 1765675459067
+                }
+            ],
+            "phaseHistory": [
+                {
+                    "to": "connecting",
+                    "from": "initiated",
+                    "metadata": {},
+                    "timestamp": 1765675318521
+                },
+                {
+                    "to": "active",
+                    "from": "connecting",
+                    "metadata": {},
+                    "timestamp": 1765675320858
+                },
+                {
+                    "to": "evaluating",
+                    "from": "active",
+                    "metadata": {
+                        "reason": "User ended the call",
+                        "source": "tool-handler"
+                    },
+                    "timestamp": 1765675456590
+                },
+                {
+                    "to": "terminated",
+                    "from": "evaluating",
+                    "metadata": {
+                        "reason": "User ended the call",
+                        "source": "tool-handler",
+                        "callSummaryData": {
+                            "summary": "The user, Sujit, requested a doctor's appointment for symptoms including hurting, headache, fever, and sneezing. I offered a slot with Dr. Raj Kumar, a General Medicine doctor, but the user declined and became frustrated. The user ultimately did not book an appointment."
+                        },
+                        "callOutcomesData": {
+                            "name": "Sujit",
+                            "booked": false,
+                            "symptoms": "hurting, headache, fever, sneezing",
+                            "specialty": "General Medicine"
+                        },
+                        "evaluationCompleted": true
+                    },
+                    "timestamp": 1765675459068
+                }
+            ],
+            "usageMetadata": {
+                "totalTokenCount": 6499,
+                "promptTokenCount": 6499,
+                "promptTokensDetails": [
+                    {
+                        "modality": "TEXT",
+                        "tokenCount": 6373
+                    },
+                    {
+                        "modality": "AUDIO",
+                        "tokenCount": 126
+                    }
+                ]
+            },
+            "callSummaryData": {
+                "summary": "The user, Sujit, requested a doctor's appointment for symptoms including hurting, headache, fever, and sneezing. I offered a slot with Dr. Raj Kumar, a General Medicine doctor, but the user declined and became frustrated. The user ultimately did not book an appointment."
+            },
+            "callOutcomesData": {
+                "name": "Sujit",
+                "booked": false,
+                "symptoms": "hurting, headache, fever, sneezing",
+                "specialty": "General Medicine"
+            },
+            "terminationReason": "User ended the call",
+            "terminationSource": "tool-handler",
+            "transcriptionData": {
+                "transcripts": [],
+                "interruptionTimestamps": [
+                    1765675326134,
+                    1765675328185,
+                    1765675328192,
+                    1765675334324,
+                    1765675347074,
+                    1765675350104,
+                    1765675355713,
+                    1765675359835,
+                    1765675374966,
+                    1765675376385,
+                    1765675380828,
+                    1765675402044,
+                    1765675420504,
+                    1765675423069,
+                    1765675442325,
+                    1765675449940,
+                    1765675453278
+                ],
+                "turnCompleteTimestamps": [
+                    1765675326134,
+                    1765675328185,
+                    1765675328192,
+                    1765675333107,
+                    1765675334324,
+                    1765675339101,
+                    1765675347074,
+                    1765675350104,
+                    1765675355713,
+                    1765675359835,
+                    1765675373805,
+                    1765675374966,
+                    1765675376385,
+                    1765675380828,
+                    1765675392661,
+                    1765675402044,
+                    1765675411978,
+                    1765675420504,
+                    1765675423069,
+                    1765675433450,
+                    1765675442326,
+                    1765675448375,
+                    1765675449940,
+                    1765675453278
+                ],
+                "generationCompleteTimestamps": [
+                    1765675331329,
+                    1765675337258,
+                    1765675341671,
+                    1765675354475,
+                    1765675369216,
+                    1765675388009,
+                    1765675406800,
+                    1765675428352,
+                    1765675446527,
+                    1765675449384
+                ]
+            }
+        }
+    },
+    "status": "success",
+    "status_code": 200,
+    "action_code": "DO_NOTHING"
+}

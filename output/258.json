@@ -1,0 +1,351 @@
+{
+    "data": {
+        "id": 258,
+        "call_id": "019b19c1-3fec-7000-ba12-8b7671f7546d",
+        "created": "2025-12-13T22:07:34.719127",
+        "phone_number": "+918098444187",
+        "status": "completed",
+        "prompt": "<ai_master_prompt>\n  <critical_directive>You are a voice AI receptionist. Keep replies under 12 words. Do not give medical advice.</critical_directive>\n  <metadata>\n    <service_name>Doctor Booking System</service_name>\n    <agent_name>Receptionist</agent_name>\n    <language>Indian English</language>\n  </metadata>\n  <Persona>\n    <Identity>Efficient Hospital Receptionist</Identity>\n    <Tone>Professional, Direct, Polite</Tone>\n    <VocalStyle>\n      <Instruction>Speak naturally with Indian intonation</Instruction>\n      <Instruction>Maintain a steady, efficient pace</Instruction>\n    </VocalStyle>\n  </Persona>\n  <vocal_output_constraints>\n    <rule type=\"absolute\">Strictly no more than 12 words per response</rule>\n    <rule type=\"absolute\">No special characters or markdown</rule>\n    <rule type=\"pacing\">Wait for user to finish, then respond immediately</rule>\n  </vocal_output_constraints>\n  <context>\n    <user_phone>+918098444187</user_phone>\n    <hospital_roster>\n      <doc><name>Dr. Raj Kumar</name><spec>General Medicine</spec><slots>9:00 AM - 5:00 PM</slots></doc>\n      <doc><name>Dr. Priya Sharma</name><spec>Pediatrics</spec><slots>10:00 AM - 4:00 PM</slots></doc>\n      <doc><name>Dr. Arun Nair</name><spec>Cardiology</spec><slots>9:00 AM - 3:00 PM</slots></doc>\n      <doc><name>Dr. Sujit Reddy</name><spec>Dermatology</spec><slots>11:00 AM - 6:00 PM</slots></doc>\n      <doc><name>Dr. Meera Patel</name><spec>Orthopedics</spec><slots>10:00 AM - 5:00 PM</slots></doc>\n    </hospital_roster>\n  </context>\n  <instructions>\n    1. Greet and ask for the patient's full name.\n    2. IF <target_doctor> is defined: Offer that specific slot. (Skip to step 5).\n    3. ELSE: Ask Symptoms.\n    4. Map Symptoms -> Specialty (Fever=GenMed, Heart=Cardio, Skin=Derma, Bone=Ortho, Child=Pediatrics).\n    5. Select matching doctor from <hospital_roster> and offer their slot.\n    6. Confirm details (Name, Doctor, Time) and ask 'Is this correct?'.\n    7. IF user says YES: Say 'Great! Your appointment is confirmed. You will receive an SMS/WhatsApp shortly.'\n    8. IMMEDIATELY ask 'Do you need help with anything else?' and WAIT for the user to reply.\n    9. IF user says NO: Say 'Goodbye!' and call end_call(reason='Booked').\n    10. IF user says YES: Help them, then repeat step 8.\n  </instructions>\n</ai_master_prompt>",
+        "evaluation_tool": {
+            "name": "call_outcomes",
+            "behavior": "BLOCKING",
+            "parameters": {
+                "type": "OBJECT",
+                "required": [
+                    "booked",
+                    "name",
+                    "symptoms",
+                    "specialty"
+                ],
+                "properties": {
+                    "date": {
+                        "type": "STRING",
+                        "description": "Date"
+                    },
+                    "name": {
+                        "type": "STRING",
+                        "description": "Name"
+                    },
+                    "time": {
+                        "type": "STRING",
+                        "description": "Time"
+                    },
+                    "booked": {
+                        "type": "BOOLEAN",
+                        "description": "Booked"
+                    },
+                    "symptoms": {
+                        "type": "STRING",
+                        "description": "Symptoms"
+                    },
+                    "specialty": {
+                        "type": "STRING",
+                        "description": "Specialty"
+                    }
+                }
+            },
+            "description": "Capture details"
+        },
+        "exotel_id": "aafef7c65424db3f57fe28653ca519ce",
+        "call_details": {
+            "callId": "019b19c1-3fec-7000-ba12-8b7671f7546d",
+            "events": [
+                {
+                    "data": {
+                        "exotelCallId": "aafef7c65424db3f57fe28653ca519ce"
+                    },
+                    "event": "call-initiated",
+                    "timestamp": 1765663654718
+                },
+                {
+                    "data": {},
+                    "event": "websocket-established",
+                    "timestamp": 1765663665215
+                },
+                {
+                    "data": {},
+                    "event": "gemini-session-ready",
+                    "timestamp": 1765663665404
+                },
+                {
+                    "data": {},
+                    "event": "greeting-complete",
+                    "timestamp": 1765663667544
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765663709361
+                },
+                {
+                    "data": {
+                        "source": "idle-service"
+                    },
+                    "event": "idle-prompt-needed",
+                    "timestamp": 1765663758642
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-271441655080530674",
+                            "args": {
+                                "reason": "Booked"
+                            },
+                            "name": "end_call"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765663844088
+                },
+                {
+                    "data": {
+                        "reason": "Booked",
+                        "source": "tool-handler"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765663844089
+                },
+                {
+                    "data": {
+                        "source": "system"
+                    },
+                    "event": "evaluation-start",
+                    "timestamp": 1765663844096
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-9672755664979302487",
+                            "args": {
+                                "name": "John Smith",
+                                "time": "10:00 AM",
+                                "booked": true,
+                                "symptoms": "Bone pain",
+                                "specialty": "Orthopedics"
+                            },
+                            "name": "call_outcomes"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765663845142
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-outcome-completed",
+                    "timestamp": 1765663845142
+                },
+                {
+                    "data": {
+                        "reason": "completed",
+                        "source": "exotel-http"
+                    },
+                    "event": "termination-requested",
+                    "timestamp": 1765663845362
+                },
+                {
+                    "data": {
+                        "source": "gemini-ws",
+                        "funcCall": {
+                            "id": "function-call-12715190367926051496",
+                            "args": {
+                                "summary": "Patient John Smith booked an appointment with Dr. Meera Patel (Orthopedics) for bone pain at 10:00 AM."
+                            },
+                            "name": "call_summary"
+                        }
+                    },
+                    "event": "tool-call",
+                    "timestamp": 1765663846159
+                },
+                {
+                    "data": {
+                        "source": "tool-handler"
+                    },
+                    "event": "call-summary-completed",
+                    "timestamp": 1765663846160
+                },
+                {
+                    "data": {
+                        "source": "system",
+                        "evaluationData": {
+                            "callSummary": {
+                                "summary": "Patient John Smith booked an appointment with Dr. Meera Patel (Orthopedics) for bone pain at 10:00 AM."
+                            },
+                            "callOutcomes": {
+                                "name": "John Smith",
+                                "time": "10:00 AM",
+                                "booked": true,
+                                "symptoms": "Bone pain",
+                                "specialty": "Orthopedics"
+                            }
+                        }
+                    },
+                    "event": "evaluation-completed",
+                    "timestamp": 1765663846160
+                }
+            ],
+            "llmNotes": [],
+            "toolCalls": [
+                {
+                    "toolName": "end_call",
+                    "timestamp": 1765663844088
+                },
+                {
+                    "toolName": "call_outcomes",
+                    "timestamp": 1765663845142
+                },
+                {
+                    "toolName": "call_summary",
+                    "timestamp": 1765663846159
+                }
+            ],
+            "phaseHistory": [
+                {
+                    "to": "connecting",
+                    "from": "initiated",
+                    "metadata": {},
+                    "timestamp": 1765663665215
+                },
+                {
+                    "to": "active",
+                    "from": "connecting",
+                    "metadata": {},
+                    "timestamp": 1765663667544
+                },
+                {
+                    "to": "evaluating",
+                    "from": "active",
+                    "metadata": {
+                        "reason": "Booked",
+                        "source": "tool-handler"
+                    },
+                    "timestamp": 1765663844096
+                },
+                {
+                    "to": "terminated",
+                    "from": "evaluating",
+                    "metadata": {
+                        "reason": "Booked",
+                        "source": "tool-handler",
+                        "callSummaryData": {
+                            "summary": "Patient John Smith booked an appointment with Dr. Meera Patel (Orthopedics) for bone pain at 10:00 AM."
+                        },
+                        "callOutcomesData": {
+                            "name": "John Smith",
+                            "time": "10:00 AM",
+                            "booked": true,
+                            "symptoms": "Bone pain",
+                            "specialty": "Orthopedics"
+                        },
+                        "evaluationCompleted": true
+                    },
+                    "timestamp": 1765663846160
+                }
+            ],
+            "usageMetadata": {
+                "totalTokenCount": 6403,
+                "promptTokenCount": 6403,
+                "promptTokensDetails": [
+                    {
+                        "modality": "TEXT",
+                        "tokenCount": 6262
+                    },
+                    {
+                        "modality": "AUDIO",
+                        "tokenCount": 141
+                    }
+                ]
+            },
+            "callSummaryData": {
+                "summary": "Patient John Smith booked an appointment with Dr. Meera Patel (Orthopedics) for bone pain at 10:00 AM."
+            },
+            "callOutcomesData": {
+                "name": "John Smith",
+                "time": "10:00 AM",
+                "booked": true,
+                "symptoms": "Bone pain",
+                "specialty": "Orthopedics"
+            },
+            "terminationReason": "Booked",
+            "terminationSource": "tool-handler",
+            "transcriptionData": {
+                "transcripts": [],
+                "interruptionTimestamps": [
+                    1765663677366,
+                    1765663686130,
+                    1765663699361,
+                    1765663715262,
+                    1765663717642,
+                    1765663721266,
+                    1765663731825,
+                    1765663738837,
+                    1765663740620,
+                    1765663744027,
+                    1765663746512,
+                    1765663748642,
+                    1765663802810,
+                    1765663815257,
+                    1765663823639,
+                    1765663828857,
+                    1765663831467,
+                    1765663833109
+                ],
+                "turnCompleteTimestamps": [
+                    1765663671111,
+                    1765663674970,
+                    1765663677366,
+                    1765663681923,
+                    1765663686130,
+                    1765663695685,
+                    1765663699361,
+                    1765663712265,
+                    1765663715262,
+                    1765663717642,
+                    1765663721266,
+                    1765663728978,
+                    1765663731825,
+                    1765663738837,
+                    1765663740620,
+                    1765663744027,
+                    1765663746512,
+                    1765663748642,
+                    1765663761073,
+                    1765663777690,
+                    1765663789218,
+                    1765663802810,
+                    1765663812711,
+                    1765663815258,
+                    1765663823639,
+                    1765663828857,
+                    1765663831467,
+                    1765663833109,
+                    1765663837412
+                ],
+                "generationCompleteTimestamps": [
+                    1765663668789,
+                    1765663672590,
+                    1765663680596,
+                    1765663690233,
+                    1765663707582,
+                    1765663724711,
+                    1765663736244,
+                    1765663754643,
+                    1765663769974,
+                    1765663783180,
+                    1765663795271,
+                    1765663806699,
+                    1765663820420,
+                    1765663836585
+                ]
+            }
+        }
+    },
+    "status": "success",
+    "status_code": 200,
+    "action_code": "DO_NOTHING"
+}
