@@ -17,7 +17,7 @@ This repository contains the **Doctor Booking Agent**, an AI-driven system that 
 
 | **Admin Dashboard** | **Doctor Dashboard** |
 | :---: | :---: |
-| <img src="doctor_booking_agent/frontend/public/admin.jpg" width="100%" alt="Admin Dashboard" /> | <img src="doctor_booking_agent/frontend/public/dco2.jpg" width="100%" alt="Doctor Dashboard" /> |
+| <img src="https://github.com/sujitlaware1809/Breakpoint-25/blob/main/doctor_booking_agent/frontend/public/admin.jpg" width="100%" alt="Admin Dashboard" /> | <img src="doctor_booking_agent/frontend/public/dco2.jpg" width="100%" alt="Doctor Dashboard" /> |
 
 | **Doctor Profile** | **Analytics View** |
 | :---: | :---: |
