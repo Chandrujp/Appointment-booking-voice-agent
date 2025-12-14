@@ -98,4 +98,3 @@ The following VAD engines are supported for the voice agent:
 
 - **Makefile**: Contains commands to query the call server.
 - **Postman Collection**: [View Documentation](https://documenter.getpostman.com/view/29008927/2sB3dSQUQE)
-# Appointment-booking-voice-agent
